@@ -1,7 +1,12 @@
+using System.ComponentModel.DataAnnotations;
 using System.Net;
+using Azure;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Ticketinho.DTOs;
+using Ticketinho.DTOs.Validation;
 
 namespace Ticketinho
 {
@@ -15,15 +20,27 @@ namespace Ticketinho
         }
 
         [Function("Login")]
-        public HttpResponseData Login([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
+        public async Task<HttpResponseData> Login([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
-            
-            var response = req.CreateResponse(HttpStatusCode.OK);
-            response.Headers.Add("Content-Type", "text/plain; charset=utf-8");
+            var loginRequest = await req.GetJsonBody<LoginRequestDto, LoginRequestValidator>();
 
+            if (!loginRequest.IsValid)
+            {
+                return await loginRequest.ToBadRequest(req);
+            }
+
+            _logger.LogInformation("Email: {}, Password: {}", loginRequest.Value.Email, loginRequest.Value.Password);
+
+            var response = CreateResponse(req, HttpStatusCode.OK);
             response.WriteString("Welcome to Azure Functions!!");
 
+            return response;
+        }
+
+        private HttpResponseData CreateResponse(HttpRequestData req, HttpStatusCode statusCode)
+        {
+            var response = req.CreateResponse(statusCode);
+            response.Headers.Add("Content-Type", "application/json; charset=utf-8");
             return response;
         }
     }
