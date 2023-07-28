@@ -1,4 +1,5 @@
-﻿using Microsoft.Azure.Functions.Worker.Http;
+﻿using System.Net;
+using Microsoft.Azure.Functions.Worker.Http;
 
 namespace Ticketinho.DTOs.Validation
 {
@@ -12,15 +13,22 @@ namespace Ticketinho.DTOs.Validation
 	{
 		public static async Task<HttpResponseData> ToBadRequest<T>(this ValidableRequest<T> request, HttpRequestData req)
 		{
-			var response = req.CreateResponse(System.Net.HttpStatusCode.BadRequest);
+			
 			var validationErrors = request.Errors.Select(e => new ValidationError{
 				Field = e.PropertyName,
 				Error = e.ErrorMessage
 			});
 
-			await response.WriteAsJsonAsync(validationErrors);
+			var response = await req.CreateErrorResponseAsync(validationErrors, HttpStatusCode.BadRequest);
 			return response;
 		}
+
+		public static async Task<HttpResponseData> CreateErrorResponseAsync(this HttpRequestData req, object payload, HttpStatusCode statusCode)
+		{
+            var response = req.CreateResponse();
+			await response.WriteAsJsonAsync(payload, statusCode);
+			return response;
+        }
 	}
 }
 
