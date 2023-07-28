@@ -1,10 +1,7 @@
-using System.ComponentModel.DataAnnotations;
 using System.Net;
-using Azure;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using Ticketinho.DTOs;
 using Ticketinho.DTOs.Validation;
 

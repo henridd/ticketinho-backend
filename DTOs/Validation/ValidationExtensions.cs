@@ -22,13 +22,6 @@ namespace Ticketinho.DTOs.Validation
 			var response = await req.CreateErrorResponseAsync(validationErrors, HttpStatusCode.BadRequest);
 			return response;
 		}
-
-		public static async Task<HttpResponseData> CreateErrorResponseAsync(this HttpRequestData req, object payload, HttpStatusCode statusCode)
-		{
-            var response = req.CreateResponse();
-			await response.WriteAsJsonAsync(payload, statusCode);
-			return response;
-        }
 	}
 }
 
