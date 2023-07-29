@@ -27,5 +27,47 @@ namespace Ticketinho.Repository.Repositories
         {
             await Collection.AddAsync(model);
         }
+
+        public virtual async Task<T?> GetByIdAsync(string id)
+        {
+            var document = Collection.Document(id);
+            if(document == null)
+            {
+                return null;
+            }
+
+            var snapshot = await document.GetSnapshotAsync();
+
+            return snapshot.ConvertTo<T>();
+        }
+
+        public virtual async Task<IEnumerable<T>> GetAllAsync()
+        {
+            var snapshot = await Collection.GetSnapshotAsync();
+
+            return snapshot.Select(x => x.ConvertTo<T>());
+        }
+
+        public virtual async Task DeleteAsync(string id)
+        {
+            await Collection.Document(id).DeleteAsync();
+        }
+
+        public virtual async Task UpdateAsync(T model)
+        {
+            var document = Collection.Document(model.Id);
+            var snapshot = await document.GetSnapshotAsync();
+            if (!snapshot.Exists)
+            {
+                return;
+            }
+
+            await document.SetAsync(model);
+        }
+
+        public virtual async Task SaveOrUpdateAsync(T model)
+        {
+            await Collection.Document(model.Id).SetAsync(model);
+        }
     }
 }

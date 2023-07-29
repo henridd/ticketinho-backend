@@ -1,4 +1,5 @@
 ﻿using Google.Cloud.Firestore;
+using Ticketinho.Repository.Models.Enums;
 
 namespace Ticketinho.Repository.Models
 {
@@ -6,5 +7,13 @@ namespace Ticketinho.Repository.Models
 
     public class Ticket : Model
     {
+        [FirestoreProperty]
+        public TicketZone Zone { get; set; }
+
+        [FirestoreProperty]
+        public TicketType Type { get; set; }
+
+        [FirestoreProperty]
+        public double Price { get; set; }
     }
 }
