@@ -17,8 +17,6 @@
     <PackageReference Include="FluentValidation" Version="11.6.0" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="DTOs\" />
-    <None Remove="DTOs\Validation\" />
     <None Remove="Middlewares\" />
   </ItemGroup>
   <ItemGroup>
@@ -34,11 +32,17 @@
     <Using Include="System.Threading.ExecutionContext" Alias="ExecutionContext" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTOs\" />
-    <Folder Include="DTOs\Validation\" />
     <Folder Include="Middlewares\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Ticketinho.Repository\Ticketinho.Repository.csproj" />
+    <ProjectReference Include="..\Ticketinho.Service\Ticketinho.Service.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Ticketinho.Repository\Ticketinho.Repository.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\Ticketinho.Common\Ticketinho.Common.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
   </ItemGroup>
 </Project>

@@ -1,7 +1,7 @@
 ﻿using System.Net;
 using Microsoft.Azure.Functions.Worker.Http;
 
-namespace Ticketinho.DTOs.Validation
+namespace Ticketinho.Functions
 {
 	public class ValidationError
 	{

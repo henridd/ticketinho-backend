@@ -2,26 +2,26 @@ using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using Ticketinho.DTOs;
-using Ticketinho.DTOs.Validation;
-using Ticketinho.Repository.Models;
-using Ticketinho.Repository.Repositories;
+using Ticketinho.Common.DTOs;
+using Ticketinho.Common.DTOs.Validation;
+using Ticketinho.Functions;
+using Ticketinho.Service.Auth;
 
 namespace Ticketinho
 {
     public class AuthFunctions
     {
         private readonly ILogger _logger;
-        private readonly IUsersRepository _usersRepository;
+        private readonly IAuthService _authService;
 
-        public AuthFunctions(ILoggerFactory loggerFactory, IUsersRepository usersRepository)
+        public AuthFunctions(ILoggerFactory loggerFactory, IAuthService authService)
         {
             _logger = loggerFactory.CreateLogger<AuthFunctions>();
-            _usersRepository = usersRepository;
+            _authService = authService;
         }
 
         [Function("Users")]
-        public async Task<HttpResponseData> CreateUser([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
+        public async Task<HttpResponseData> RegisterUser([HttpTrigger(AuthorizationLevel.Anonymous, "post")] HttpRequestData req)
         {
             var request = await req.GetJsonBody<CreateUserRequestDto, CreateUserRequestValidator>();
 
@@ -30,14 +30,8 @@ namespace Ticketinho
                 return await request.ToBadRequest(req);
             }
 
-            await _usersRepository.AddAsync(
-                new User(
-                    request.Value.Name,
-                    request.Value.Email,
-                    request.Value.Password,
-                    request.Value.PhoneNumber
-                    )
-                );
+            await _authService.RegisterUserAsync(request.Value);
+            
 
             return CreateResponse(req, HttpStatusCode.Created);
 
@@ -55,11 +49,8 @@ namespace Ticketinho
 
             _logger.LogInformation("Email: {}, Password: {}", loginRequest.Value.Email, loginRequest.Value.Password);
 
-            var user = await _usersRepository.GetByEmailAsync(loginRequest.Value.Email);
-            if(user is null)
-            {
-                return req.CreateResponse(HttpStatusCode.NotFound);
-            }
+            var token = await _authService.LoginAsync(loginRequest.Value.Email);
+            
 
             var response = CreateResponse(req, HttpStatusCode.OK);
             response.WriteString("Welcome to Azure Functions!!");
