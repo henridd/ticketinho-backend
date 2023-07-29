@@ -11,6 +11,7 @@ var host = new HostBuilder()
     .ConfigureServices(services =>
     {
         services.AddScoped<ITicketsRepository, TicketsRepository>();
+        services.AddScoped<IUsersRepository, UsersRepository>();
     })
     .Build();
 
