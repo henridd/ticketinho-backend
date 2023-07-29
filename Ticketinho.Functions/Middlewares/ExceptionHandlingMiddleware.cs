@@ -25,9 +25,9 @@ namespace Ticketinho.Middlewares
             }
             // Currently Azure Functions throw an aggregate exception which contains the exception.
             // https://github.com/Azure/azure-functions-dotnet-worker/issues/993
-            catch (AggregateException ex) when (ex.InnerException is HttpRequestException)
+            catch (AggregateException ex) when (ex.InnerException is HttpRequestException httpException)
             {
-                await ProcessException(new { Error = ex.InnerException.Message }, HttpStatusCode.BadRequest, context);
+                await ProcessException(new { Error = httpException.Message }, httpException.StatusCode ?? HttpStatusCode.BadRequest, context);
             }
             catch(Exception ex)
             {
