@@ -55,6 +55,12 @@ namespace Ticketinho
 
             _logger.LogInformation("Email: {}, Password: {}", loginRequest.Value.Email, loginRequest.Value.Password);
 
+            var user = await _usersRepository.GetByEmailAsync(loginRequest.Value.Email);
+            if(user is null)
+            {
+                return req.CreateResponse(HttpStatusCode.NotFound);
+            }
+
             var response = CreateResponse(req, HttpStatusCode.OK);
             response.WriteString("Welcome to Azure Functions!!");
 
