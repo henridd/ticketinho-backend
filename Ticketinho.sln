@@ -5,7 +5,9 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ticketinho.Functions", "Ticketinho.Functions\Ticketinho.Functions.csproj", "{83650C38-A97C-43DA-A35E-FFC6389A81A7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketinho.Repository", "Ticketinho.Repository\Ticketinho.Repository.csproj", "{07F6F1EC-3BD9-4BFE-AC4F-6026787C3A77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ticketinho.Repository", "Ticketinho.Repository\Ticketinho.Repository.csproj", "{07F6F1EC-3BD9-4BFE-AC4F-6026787C3A77}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketinho.Service", "Ticketinho.Service\Ticketinho.Service.csproj", "{53305497-2DFE-4E20-9520-64385B13B5BD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{07F6F1EC-3BD9-4BFE-AC4F-6026787C3A77}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07F6F1EC-3BD9-4BFE-AC4F-6026787C3A77}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07F6F1EC-3BD9-4BFE-AC4F-6026787C3A77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53305497-2DFE-4E20-9520-64385B13B5BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53305497-2DFE-4E20-9520-64385B13B5BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53305497-2DFE-4E20-9520-64385B13B5BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53305497-2DFE-4E20-9520-64385B13B5BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
