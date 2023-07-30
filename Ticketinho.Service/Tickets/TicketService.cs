@@ -31,8 +31,10 @@ namespace Ticketinho.Service.Tickets
         public async Task<Ticket?> GetAsync(string id)
             => await _ticketsRepository.GetByIdAsync(id);
 
-        public async Task<IEnumerable<Ticket>> GetAllAsync()
-            => await _ticketsRepository.GetAllAsync();
+        public async Task<IEnumerable<Ticket>> GetAllActiveAsync()
+        {
+            return await _ticketsRepository.GetAllActiveAsync();
+        }
 
         public async Task UpdateAsync(string id, TicketZone zone, TicketType type, double price)
         {

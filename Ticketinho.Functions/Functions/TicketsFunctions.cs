@@ -57,7 +57,7 @@ namespace Ticketinho.Functions
         [Function("GetAllTickets")]
         public async Task<HttpResponseData> GetAll([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "tickets")] HttpRequestData req)
         {
-            var tickets = await _ticketService.GetAllAsync();
+            var tickets = await _ticketService.GetAllActiveAsync();
 
             return await req.CreateResponseWithContentAsync(tickets);
         }

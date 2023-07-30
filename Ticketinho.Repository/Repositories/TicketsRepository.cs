@@ -35,5 +35,14 @@ namespace Ticketinho.Repository.Repositories
 
             await batch.CommitAsync();
         }
+
+        public async Task<IEnumerable<Ticket>> GetAllActiveAsync()
+        {
+            var query = Collection.WhereEqualTo("IsActive", true);
+
+            var snapshot = await query.GetSnapshotAsync();
+
+            return snapshot.Select(x => x.ConvertTo<Ticket>());
+        }
     }
 }
