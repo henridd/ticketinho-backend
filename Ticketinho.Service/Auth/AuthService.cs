@@ -11,11 +11,13 @@ namespace Ticketinho.Service.Auth
 	{
         private readonly IUsersRepository _usersRepository;
         private readonly IJwtBuilder _jwtBuilder;
+        private readonly ICryptoService _cryptoService;
 
-        public AuthService(IUsersRepository usersRepository, IJwtBuilder jwtBuilder)
+        public AuthService(IUsersRepository usersRepository, IJwtBuilder jwtBuilder, ICryptoService cryptoService)
 		{
             _usersRepository = usersRepository;
             _jwtBuilder = jwtBuilder;
+            _cryptoService = cryptoService;
 		}
 
         public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request)
@@ -26,8 +28,8 @@ namespace Ticketinho.Service.Auth
                 return new LoginResponseDto();
             }
 
-            // TODO: We should store the hashed password
-            if (request.Password != user.Password)
+            // TODO: We should store the hashed password        
+            if (!_cryptoService.VerifyPassword(request.Password, user.HashedPassword, user.Salt))
             {
                 return new LoginResponseDto() { Email = user.Email };
             }
@@ -47,14 +49,16 @@ namespace Ticketinho.Service.Auth
 
         public async Task RegisterUserAsync(CreateUserRequestDto request)
         {
+            var hashedPassword = _cryptoService.HashPassword(request.Password, out var salt);
             await _usersRepository.AddAsync(
-                new User(
-                    request.Name,
-                    request.Email,
-                    request.Password,
-                    request.PhoneNumber
-                    )
-                );
+                new User
+                {
+                    Name = request.Name,
+                    Email = request.Email,
+                    HashedPassword = hashedPassword,
+                    Salt = salt,
+                    PhoneNumber = request.PhoneNumber
+                });
         }
     }
 }

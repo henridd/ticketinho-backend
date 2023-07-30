@@ -14,13 +14,6 @@ namespace Ticketinho.UnitTests.AuthTests
             const string Iss = "Audience";
             const string Aud = "Issuer";
 
-            var user = new User()
-            {
-                Id = "1",
-                Email = "luke@skywalker.com",
-                Password = "yoda123"
-            };
-
             // Act
 			var token = new JwtBuilder().Build(iss: Iss, aud: Aud);
 			

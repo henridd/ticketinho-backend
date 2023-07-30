@@ -16,6 +16,7 @@ var host = new HostBuilder()
 
         services.AddScoped<IJwtBuilder, JwtBuilder>();
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ICryptoService, CryptoService>();
     })
     .Build();
 

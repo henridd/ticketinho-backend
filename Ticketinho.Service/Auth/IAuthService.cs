@@ -1,5 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
-using Ticketinho.Common.DTOs;
+﻿using Ticketinho.Common.DTOs;
 
 namespace Ticketinho.Service.Auth
 {
