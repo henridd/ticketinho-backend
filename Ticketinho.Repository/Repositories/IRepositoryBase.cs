@@ -2,7 +2,7 @@
 {
     public interface IRepositoryBase<T>
     {
-        Task AddAsync(T model);
+        Task<string> AddAsync(T model);
 
         Task<T?> GetByIdAsync(string id);
 
