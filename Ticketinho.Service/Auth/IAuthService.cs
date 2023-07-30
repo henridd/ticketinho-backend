@@ -1,11 +1,10 @@
-﻿using System.IdentityModel.Tokens.Jwt;
 using Ticketinho.Common.DTOs.Auth;
 
 namespace Ticketinho.Service.Auth
 {
-    public interface IAuthService
-    {
-        Task<JwtSecurityToken> LoginAsync(string email);
-        Task RegisterUserAsync(CreateUserRequestDto request);
-    }
+        public interface IAuthService
+        {
+            Task<LoginResponseDto> LoginAsync(LoginRequestDto request);
+            Task RegisterUserAsync(CreateUserRequestDto request);
+        }
 }

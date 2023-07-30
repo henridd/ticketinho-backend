@@ -18,10 +18,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="AuthTests\" />
+    <None Remove="Services\" />
+    <None Remove="Services\Auth\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="AuthTests\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Auth\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Ticketinho.Common\Ticketinho.Common.csproj" />

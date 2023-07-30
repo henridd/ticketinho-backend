@@ -25,16 +25,14 @@ namespace Ticketinho
         {
             var request = await req.GetJsonBody<CreateUserRequestDto, CreateUserRequestValidator>();
 
-            if(!request.IsValid)
+            if (!request.IsValid)
             {
                 return await request.ToBadRequest(req);
             }
 
             await _authService.RegisterUserAsync(request.Value);
-            
-
-            return CreateResponse(req, HttpStatusCode.Created);
-
+            var response = req.CreateResponse(HttpStatusCode.Created);
+            return response;
         }
 
         [Function("Login")]
@@ -47,21 +45,18 @@ namespace Ticketinho
                 return await loginRequest.ToBadRequest(req);
             }
 
-            _logger.LogInformation("Email: {}, Password: {}", loginRequest.Value.Email, loginRequest.Value.Password);
+            var payload = await _authService.LoginAsync(loginRequest.Value);
+            if (payload.Email is null)
+            {
+                return req.CreateResponse(HttpStatusCode.NotFound);
+            }
 
-            var token = await _authService.LoginAsync(loginRequest.Value.Email);
-            
+            if (payload.Token is null)
+            {
+                return req.CreateResponse(HttpStatusCode.Unauthorized);
+            }
 
-            var response = CreateResponse(req, HttpStatusCode.OK);
-            response.WriteString("Welcome to Azure Functions!!");
-
-            return response;
-        }
-
-        private HttpResponseData CreateResponse(HttpRequestData req, HttpStatusCode statusCode)
-        {
-            var response = req.CreateResponse(statusCode);
-            response.Headers.Add("Content-Type", "application/json; charset=utf-8");
+            var response = await req.CreateResponseWithContentAsync(payload);
             return response;
         }
     }

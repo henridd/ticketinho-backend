@@ -12,19 +12,14 @@ namespace Ticketinho.Repository.Models
         public string Email { get; set; }
 
         [FirestoreProperty]
-        public string Password { get; set; }
+
+        public string HashedPassword { get; set; }
+
+        [FirestoreProperty]
+        public byte[] Salt { get; set; }
 
         [FirestoreProperty]
         public string PhoneNumber { get; set; }
-
-        public User(string name, string email, string password, string phoneNumber)
-            : base()
-        {
-            Name = name;
-            Email = email;
-            Password = password;
-            PhoneNumber = phoneNumber;
-        }
 
         public User()
         {
