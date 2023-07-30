@@ -7,15 +7,21 @@ namespace Ticketinho.Service.Tickets
     public class TicketService : ITicketService
     {
         private readonly ITicketsRepository _ticketsRepository;
+        private readonly IUsersRepository _usersRepository;
 
-        public TicketService(ITicketsRepository ticketsRepository)
+        public TicketService(ITicketsRepository ticketsRepository, IUsersRepository usersRepository)
         {
             _ticketsRepository = ticketsRepository ?? throw new ArgumentNullException(nameof(ticketsRepository));
+            _usersRepository = usersRepository;
         }
 
         public async Task<string> AddAsync(string ownerId, TicketZone zone, TicketType type, double price)
         {
-            // TODO: Pesquisar e validar se o owner é válido
+            var owner = _usersRepository.GetByIdAsync(ownerId);
+            if(owner == null)
+            {
+                throw new ArgumentException($"There is no user with id {ownerId}", nameof(ownerId));
+            }
 
             var ticket = new Ticket(ownerId, zone, type, price);
 
