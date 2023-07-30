@@ -65,8 +65,13 @@ namespace Ticketinho.UnitTests.AuthTests
             var exp = jwt.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Exp).Value;
             var expireDateTime = DateTimeOffset.FromUnixTimeSeconds(long.Parse(exp)).UtcDateTime;
             
-            Assert.That(expireDateTime, Is.EqualTo(expiration));
+            Assert.That(TrimMilliseconds(expireDateTime), Is.EqualTo(TrimMilliseconds(expiration)));
         }
-	}
+
+        public DateTime TrimMilliseconds(DateTime dt)
+        {
+            return new DateTime(dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, 0, dt.Kind);
+        }
+    }
 }
 
