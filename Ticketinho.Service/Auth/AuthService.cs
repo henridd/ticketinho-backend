@@ -1,12 +1,12 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Net;
-using Ticketinho.Common.DTOs;
+using Ticketinho.Common.DTOs.Auth;
 using Ticketinho.Repository.Models;
 using Ticketinho.Repository.Repositories;
 
 namespace Ticketinho.Service.Auth
 {
-	public class AuthService : IAuthService
+    public class AuthService : IAuthService
 	{
         private readonly IUsersRepository _usersRepository;
 

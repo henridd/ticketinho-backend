@@ -2,10 +2,10 @@ using System.Net;
 using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using Microsoft.Extensions.Logging;
-using Ticketinho.Common.DTOs;
-using Ticketinho.Common.DTOs.Validation;
+using Ticketinho.Common.DTOs.Auth;
 using Ticketinho.Functions;
 using Ticketinho.Service.Auth;
+using Ticketinho.Validation.Auth;
 
 namespace Ticketinho
 {

@@ -1,10 +1,10 @@
 ﻿using System.Net;
 using Microsoft.Azure.Functions.Worker.Http;
-using Ticketinho.Common.DTOs.Validation;
+using Ticketinho.Validation;
 
 namespace Ticketinho.Functions
 {
-	public class ValidationError
+    public class ValidationError
 	{
 		public required string Field { get; set; }
         public required string Error { get; set; }

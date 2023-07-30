@@ -1,6 +1,6 @@
-﻿using Ticketinho.Repository.Models.Enums;
+﻿using Ticketinho.Common.Enums;
 
-namespace Ticketinho.DTOs.Tickets
+namespace Ticketinho.Common.DTOs.Tickets
 {
     public class UpdateTicketRequestDto
     {
