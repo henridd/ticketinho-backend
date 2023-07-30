@@ -1,6 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using NUnit.Framework;
-using Ticketinho.Repository.Models;
 using Ticketinho.Service.Auth;
 
 namespace Ticketinho.UnitTests.AuthTests
@@ -51,4 +50,3 @@ namespace Ticketinho.UnitTests.AuthTests
         }
 	}
 }
-

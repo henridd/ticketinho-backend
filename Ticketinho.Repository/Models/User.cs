@@ -12,6 +12,7 @@ namespace Ticketinho.Repository.Models
         public string Email { get; set; }
 
         [FirestoreProperty]
+
         public string HashedPassword { get; set; }
 
         [FirestoreProperty]

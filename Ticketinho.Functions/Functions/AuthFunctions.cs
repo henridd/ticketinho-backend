@@ -25,7 +25,7 @@ namespace Ticketinho
         {
             var request = await req.GetJsonBody<CreateUserRequestDto, CreateUserRequestValidator>();
 
-            if(!request.IsValid)
+            if (!request.IsValid)
             {
                 return await request.ToBadRequest(req);
             }

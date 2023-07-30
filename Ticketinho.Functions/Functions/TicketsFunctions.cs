@@ -1,26 +1,98 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Azure.Functions.Worker;
+﻿using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
-using Ticketinho.Repository.Models;
-using Ticketinho.Repository.Repositories;
+using System.Net;
+using Ticketinho.DTOs.Tickets;
+using Ticketinho.DTOs.Validation;
+using Ticketinho.DTOs.Validation.Tickets;
+using Ticketinho.Service.Tickets;
 
 namespace Ticketinho.Functions
 {
     internal class TicketsFunctions
     {
-        private readonly ITicketsRepository ticketRepository;
+        private readonly ITicketService _ticketService;
 
-        public TicketsFunctions(ITicketsRepository ticketRepository)
+        public TicketsFunctions(ITicketService ticketService)
         {
-            this.ticketRepository = ticketRepository;
+            _ticketService = ticketService;
         }
 
-        [Function("Test")]
-        public async Task<IActionResult> Test([HttpTrigger(AuthorizationLevel.Anonymous, "get")] HttpRequestData req)
+        [Function("AddTicket")]
+        public async Task<HttpResponseData> Add([HttpTrigger(AuthorizationLevel.Anonymous, "post", Route = "tickets")] HttpRequestData req)
         {
-            await ticketRepository.AddAsync(new Ticket());
+            var createRequest = await req.GetJsonBody<CreateTicketRequestDto, CreateTicketRequestValidator>();
+            if (!createRequest.IsValid)
+            {
+                return await createRequest.ToBadRequest(req);
+            }
 
-            return new OkResult();
+            var ticketId = await _ticketService.AddAsync(createRequest.Value.OwnerId,
+                                                         createRequest.Value.Zone,
+                                                         createRequest.Value.Type,
+                                                         createRequest.Value.Price);
+
+            return await req.CreateResponseWithContentAsync(ticketId);
+        }
+
+        [Function("DeleteTicket")]
+        public async Task<HttpResponseData> Delete([HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "tickets/{id}")] HttpRequestData req, string id)
+        {
+            await _ticketService.DeleteAsync(id);
+
+            return req.CreateResponse();
+        }
+
+        [Function("GetTicket")]
+        public async Task<HttpResponseData> Get([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "tickets/{id}")] HttpRequestData req, string id)
+        {
+            var ticket = await _ticketService.GetAsync(id);
+
+            if (ticket == null)
+            {
+                return req.CreateResponse(HttpStatusCode.NotFound);
+            }
+
+            return await req.CreateResponseWithContentAsync(ticket);
+        }
+
+        [Function("GetAllTickets")]
+        public async Task<HttpResponseData> GetAll([HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "tickets")] HttpRequestData req)
+        {
+            var tickets = await _ticketService.GetAllAsync();
+
+            return await req.CreateResponseWithContentAsync(tickets);
+        }
+
+        [Function("UpdateTicket")]
+        public async Task<HttpResponseData> Update([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "tickets/{id}")] HttpRequestData req, string id)
+        {
+            var updateRequest = await req.GetJsonBody<UpdateTicketRequestDto, UpdateTicketRequestValidator>();
+
+            await _ticketService.UpdateAsync(id,
+                                             updateRequest.Value.Zone,
+                                             updateRequest.Value.Type,
+                                             updateRequest.Value.Price);
+
+            return req.CreateResponse();
+        }
+
+        [Function("ReactivateTicket")]
+        public async Task<HttpResponseData> ReactivateTicket([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "tickets/{id}/reactivate")] HttpRequestData req, string id)
+        {
+            await _ticketService.ReactivateTicketAsync(id);
+
+            return req.CreateResponse();
+        }
+
+        [Function("Deactivate old tickets")]
+        public async Task Run([TimerTrigger("0 0 4 * * *")] TimerInfo timer)
+        {
+            await _ticketService.DeactivateOldTicketsAsync();
+        }
+
+        public class TimerInfo
+        {
+
         }
     }
 }
