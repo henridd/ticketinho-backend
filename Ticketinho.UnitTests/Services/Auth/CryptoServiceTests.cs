@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using Ticketinho.Service.Auth;
 
-namespace Ticketinho.UnitTests.AuthTests
+namespace Ticketinho.UnitTests.Services.Auth
 {
 	public class CryptoServiceTests
 	{
