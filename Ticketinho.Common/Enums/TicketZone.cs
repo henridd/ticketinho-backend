@@ -1,4 +1,4 @@
-﻿namespace Ticketinho.Repository.Models.Enums
+﻿namespace Ticketinho.Common.Enums
 {
     [Flags]
     public enum TicketZone

@@ -3,7 +3,7 @@ using FluentValidation;
 using Microsoft.Azure.Functions.Worker.Http;
 using System.Net;
 using System.Text.Json;
-using Ticketinho.Common.DTOs.Validation;
+using Ticketinho.Validation;
 
 namespace Ticketinho
 {

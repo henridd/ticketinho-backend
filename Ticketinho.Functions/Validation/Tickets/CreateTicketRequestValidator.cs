@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using Ticketinho.DTOs.Tickets;
+using Ticketinho.Common.DTOs.Tickets;
 
-namespace Ticketinho.DTOs.Validation.Tickets
+namespace Ticketinho.Validation.Tickets
 {
     public class CreateTicketRequestValidator : AbstractValidator<CreateTicketRequestDto>
     {
