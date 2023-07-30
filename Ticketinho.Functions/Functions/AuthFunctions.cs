@@ -56,14 +56,7 @@ namespace Ticketinho
                 return req.CreateResponse(HttpStatusCode.Unauthorized);
             }
 
-            var response = await CreateResponseAsync(req, payload, HttpStatusCode.OK);
-            return response;
-        }
-
-        private async Task<HttpResponseData> CreateResponseAsync<T>(HttpRequestData req, T payload, HttpStatusCode statusCode)
-        {
-            var response = req.CreateResponse(statusCode);
-            await response.WriteAsJsonAsync(payload);
+            var response = await req.CreateResponseWithContentAsync(payload);
             return response;
         }
     }

@@ -33,10 +33,6 @@ namespace Ticketinho.UnitTests.AuthTests
             // Arrange
             var expiration = DateTime.UtcNow.AddMinutes(15);
 
-            // Trim milli and micro seconds
-            expiration = expiration.AddMilliseconds(-expiration.Millisecond);
-            expiration = expiration.AddMicroseconds(-expiration.Microsecond);
-
             // Act
             var token = new JwtBuilder().WithExpiration(expiration)
                 .Build(iss: "TicketinhoBackend", aud: "TicketinhoBackend");
@@ -44,9 +40,8 @@ namespace Ticketinho.UnitTests.AuthTests
             // Assert
             var jwt = new JwtSecurityTokenHandler().ReadJwtToken(token);
             var exp = jwt.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Exp).Value;
-            var expireDateTime = DateTimeOffset.FromUnixTimeSeconds(long.Parse(exp)).UtcDateTime;
-            
-            Assert.That(expireDateTime, Is.EqualTo(expiration));
+            var expireDateTime = DateTimeOffset.FromUnixTimeSeconds(long.Parse(exp)).UtcDateTime.Ticks;
+            Assert.That(expireDateTime / 10000000, Is.EqualTo(expiration.Ticks/ 10000000));
         }
 	}
 }

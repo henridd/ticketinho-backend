@@ -1,3 +1,4 @@
+using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Ticketinho.Middlewares;
@@ -21,6 +22,11 @@ var host = new HostBuilder()
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ICryptoService, CryptoService>();
         services.AddScoped<ITicketService, TicketService>();
+
+        services.Configure<JsonSerializerOptions>(options => {
+            options.PropertyNamingPolicy = JsonNamingPolicy.CamelCase;
+        });
+        
     })
     .Build();
 
