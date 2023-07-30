@@ -83,5 +83,16 @@ namespace Ticketinho.Functions
 
             return req.CreateResponse();
         }
+
+        [Function("Deactivate old tickets")]
+        public async Task Run([TimerTrigger("0 0 4 * * *")] TimerInfo timer)
+        {
+            await _ticketService.DeactivateOldTicketsAsync();
+        }
+
+        public class TimerInfo
+        {
+
+        }
     }
 }

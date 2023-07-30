@@ -48,5 +48,10 @@ namespace Ticketinho.Service.Tickets
 
             await _ticketsRepository.ReactivateAsync(ticket);
         }
+
+        public async Task DeactivateOldTicketsAsync()
+        {
+            await _ticketsRepository.DeactivateTicketsAsync(DateTime.UtcNow);
+        }
     }
 }
