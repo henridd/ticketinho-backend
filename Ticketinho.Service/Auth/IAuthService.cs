@@ -1,4 +1,4 @@
-using Ticketinho.Common.DTOs;
+using Ticketinho.Common.DTOs.Auth;
 
 namespace Ticketinho.Service.Auth
 {

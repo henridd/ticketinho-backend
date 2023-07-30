@@ -10,9 +10,6 @@
     <None Remove="DTOs\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DTOs\" />
-  </ItemGroup>
-  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="11.6.0" />
   </ItemGroup>
 </Project>

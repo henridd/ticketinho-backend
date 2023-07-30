@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Ticketinho.Common\Ticketinho.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="secrets.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

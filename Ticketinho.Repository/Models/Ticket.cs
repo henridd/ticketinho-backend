@@ -1,5 +1,5 @@
 ﻿using Google.Cloud.Firestore;
-using Ticketinho.Repository.Models.Enums;
+using Ticketinho.Common.Enums;
 
 namespace Ticketinho.Repository.Models
 {

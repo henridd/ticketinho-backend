@@ -1,5 +1,5 @@
-﻿using Ticketinho.Repository.Models;
-using Ticketinho.Repository.Models.Enums;
+﻿using Ticketinho.Common.Enums;
+using Ticketinho.Repository.Models;
 using Ticketinho.Repository.Repositories;
 
 namespace Ticketinho.Service.Tickets

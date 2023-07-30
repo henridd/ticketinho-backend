@@ -1,24 +1,24 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
-using Ticketinho.Common.DTOs;
+using Ticketinho.Common.DTOs.Auth;
 using Ticketinho.Repository.Models;
 using Ticketinho.Repository.Repositories;
 
 namespace Ticketinho.Service.Auth
 {
-	public class AuthService : IAuthService
-	{
+    public class AuthService : IAuthService
+    {
         private readonly IUsersRepository _usersRepository;
         private readonly IJwtBuilder _jwtBuilder;
         private readonly ICryptoService _cryptoService;
 
         public AuthService(IUsersRepository usersRepository, IJwtBuilder jwtBuilder, ICryptoService cryptoService)
-		{
+        {
             _usersRepository = usersRepository;
             _jwtBuilder = jwtBuilder;
             _cryptoService = cryptoService;
-		}
+        }
 
         public async Task<LoginResponseDto> LoginAsync(LoginRequestDto request)
         {

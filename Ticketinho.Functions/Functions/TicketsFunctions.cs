@@ -1,10 +1,9 @@
 ﻿using Microsoft.Azure.Functions.Worker;
 using Microsoft.Azure.Functions.Worker.Http;
 using System.Net;
-using Ticketinho.DTOs.Tickets;
-using Ticketinho.DTOs.Validation;
-using Ticketinho.DTOs.Validation.Tickets;
+using Ticketinho.Common.DTOs.Tickets;
 using Ticketinho.Service.Tickets;
+using Ticketinho.Validation.Tickets;
 
 namespace Ticketinho.Functions
 {
