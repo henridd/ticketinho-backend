@@ -7,5 +7,7 @@ namespace Ticketinho.Repository.Repositories
         Task ReactivateAsync(Ticket ticket);
 
         Task DeactivateTicketsAsync(DateTime maximumValidDate);
+
+        Task<IEnumerable<Ticket>> GetAllActiveAsync();
     }
 }
