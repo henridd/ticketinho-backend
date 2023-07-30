@@ -13,10 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketinho.UnitTests", "Tic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketinho.Common", "Ticketinho.Common\Ticketinho.Common.csproj", "{D535A57F-0FEB-4824-BD82-E51CE27D2DB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketinho.UnitTests", "Ticketinho.UnitTests\Ticketinho.UnitTests.csproj", "{04CB2837-2735-4F09-A0F9-F736BA6BFD16}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketinho.Common", "Ticketinho.Common\Ticketinho.Common.csproj", "{D535A57F-0FEB-4824-BD82-E51CE27D2DB4}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
