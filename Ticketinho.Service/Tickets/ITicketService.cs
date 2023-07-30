@@ -9,7 +9,7 @@ namespace Ticketinho.Service.Tickets
 
         Task<Ticket?> GetAsync(string id);
 
-        Task<IEnumerable<Ticket>> GetAllAsync();
+        Task<IEnumerable<Ticket>> GetAllActiveAsync();
 
         Task UpdateAsync(string id, TicketZone zone, TicketType type, double price);
 
