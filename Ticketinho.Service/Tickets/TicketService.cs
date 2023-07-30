@@ -30,12 +30,7 @@ namespace Ticketinho.Service.Tickets
 
         public async Task UpdateAsync(string id, TicketZone zone, TicketType type, double price)
         {
-            var ticket = await _ticketsRepository.GetByIdAsync(id);
-
-            if (ticket == null)
-            {
-                return;
-            }
+            var ticket = await _ticketsRepository.GetByIdAsync(id) ?? throw new ArgumentException($"There is no ticket with id {id}");
 
             ticket.Price = price;
             ticket.Type = type;
@@ -46,5 +41,12 @@ namespace Ticketinho.Service.Tickets
 
         public async Task DeleteAsync(string ticketId)
             => await _ticketsRepository.DeleteAsync(ticketId);
+
+        public async Task ReactivateTicketAsync(string id)
+        {
+            var ticket = await GetAsync(id) ?? throw new ArgumentException($"There is no ticket with id {id}");
+
+            await _ticketsRepository.ReactivateAsync(ticket);
+        }
     }
 }

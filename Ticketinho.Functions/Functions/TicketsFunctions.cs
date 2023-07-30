@@ -75,5 +75,13 @@ namespace Ticketinho.Functions
 
             return req.CreateResponse();
         }
+
+        [Function("ReactivateTicket")]
+        public async Task<HttpResponseData> ReactivateTicket([HttpTrigger(AuthorizationLevel.Anonymous, "patch", Route = "tickets/{id}/reactivate")] HttpRequestData req, string id)
+        {
+            await _ticketService.ReactivateTicketAsync(id);
+
+            return req.CreateResponse();
+        }
     }
 }

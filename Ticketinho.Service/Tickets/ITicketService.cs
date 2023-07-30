@@ -14,5 +14,7 @@ namespace Ticketinho.Service.Tickets
         Task UpdateAsync(string id, TicketZone zone, TicketType type, double price);
 
         Task DeleteAsync(string ticketId);
+
+        Task ReactivateTicketAsync(string id);
     }
 }

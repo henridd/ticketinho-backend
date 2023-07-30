@@ -32,7 +32,7 @@ namespace Ticketinho.Middlewares
             catch(Exception ex)
             {
                 _logger.LogError(ex, "Error processing invocation");
-                await ProcessException(new { Error = "Internal Server Error" }, HttpStatusCode.InternalServerError, context); 
+                await ProcessException(new { Error = ex.Message }, HttpStatusCode.InternalServerError, context); 
             }
         }
 

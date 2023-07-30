@@ -19,6 +19,9 @@ namespace Ticketinho.Repository.Models
         [FirestoreProperty]
         public double Price { get; set; }
 
+        [FirestoreProperty]
+        public bool IsActive { get; set; }
+
         public Ticket() { }
 
         public Ticket(string ownerId, TicketZone zone, TicketType type, double price)
@@ -27,6 +30,7 @@ namespace Ticketinho.Repository.Models
             Zone = zone;
             Type = type;
             Price = price;
+            IsActive = true;
         }
     }
 }
