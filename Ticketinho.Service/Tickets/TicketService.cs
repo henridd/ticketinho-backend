@@ -17,7 +17,7 @@ namespace Ticketinho.Service.Tickets
 
         public async Task<string> AddAsync(string ownerId, TicketZone zone, TicketType type, double price)
         {
-            var owner = _usersRepository.GetByIdAsync(ownerId);
+            var owner = await _usersRepository.GetByIdAsync(ownerId);
             if(owner == null)
             {
                 throw new ArgumentException($"There is no user with id {ownerId}", nameof(ownerId));
@@ -31,10 +31,8 @@ namespace Ticketinho.Service.Tickets
         public async Task<Ticket?> GetAsync(string id)
             => await _ticketsRepository.GetByIdAsync(id);
 
-        public async Task<IEnumerable<Ticket>> GetAllActiveAsync()
-        {
-            return await _ticketsRepository.GetAllActiveAsync();
-        }
+        public async Task<IEnumerable<Ticket>> GetAllActiveAsync() 
+            => await _ticketsRepository.GetAllActiveAsync();
 
         public async Task UpdateAsync(string id, TicketZone zone, TicketType type, double price)
         {
