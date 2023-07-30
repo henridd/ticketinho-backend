@@ -1,4 +1,4 @@
-﻿namespace Ticketinho.DTOs
+﻿namespace Ticketinho.Common.DTOs
 {
 	public class LoginRequestDto
 	{

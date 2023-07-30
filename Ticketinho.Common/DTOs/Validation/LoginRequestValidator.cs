@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace Ticketinho.DTOs.Validation
+namespace Ticketinho.Common.DTOs.Validation
 {
 	public class LoginRequestValidator : AbstractValidator<LoginRequestDto>
 	{
