@@ -31,10 +31,8 @@ namespace Ticketinho
             }
 
             await _authService.RegisterUserAsync(request.Value);
-            
-
-            return CreateResponse(req, HttpStatusCode.Created);
-
+            var response = req.CreateResponse(HttpStatusCode.Created);
+            return response;
         }
 
         [Function("Login")]
@@ -47,21 +45,25 @@ namespace Ticketinho
                 return await loginRequest.ToBadRequest(req);
             }
 
-            _logger.LogInformation("Email: {}, Password: {}", loginRequest.Value.Email, loginRequest.Value.Password);
+            var payload = await _authService.LoginAsync(loginRequest.Value);
+            if (payload.Email is null)
+            {
+                return req.CreateResponse(HttpStatusCode.NotFound);
+            }
 
-            var token = await _authService.LoginAsync(loginRequest.Value.Email);
-            
+            if (payload.Token is null)
+            {
+                return req.CreateResponse(HttpStatusCode.Unauthorized);
+            }
 
-            var response = CreateResponse(req, HttpStatusCode.OK);
-            response.WriteString("Welcome to Azure Functions!!");
-
+            var response = await CreateResponseAsync(req, payload, HttpStatusCode.OK);
             return response;
         }
 
-        private HttpResponseData CreateResponse(HttpRequestData req, HttpStatusCode statusCode)
+        private async Task<HttpResponseData> CreateResponseAsync<T>(HttpRequestData req, T payload, HttpStatusCode statusCode)
         {
             var response = req.CreateResponse(statusCode);
-            response.Headers.Add("Content-Type", "application/json; charset=utf-8");
+            await response.WriteAsJsonAsync(payload);
             return response;
         }
     }

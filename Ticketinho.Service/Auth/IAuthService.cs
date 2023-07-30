@@ -5,7 +5,7 @@ namespace Ticketinho.Service.Auth
 {
     public interface IAuthService
     {
-        Task<JwtSecurityToken> LoginAsync(string email);
+        Task<LoginResponseDto> LoginAsync(LoginRequestDto request);
         Task RegisterUserAsync(CreateUserRequestDto request);
     }
 }

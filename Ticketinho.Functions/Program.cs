@@ -14,6 +14,7 @@ var host = new HostBuilder()
         services.AddScoped<ITicketsRepository, TicketsRepository>();
         services.AddScoped<IUsersRepository, UsersRepository>();
 
+        services.AddScoped<IJwtBuilder, JwtBuilder>();
         services.AddScoped<IAuthService, AuthService>();
     })
     .Build();

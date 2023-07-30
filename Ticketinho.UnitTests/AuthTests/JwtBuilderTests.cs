@@ -1,6 +1,4 @@
-﻿using System.Globalization;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
+﻿using System.IdentityModel.Tokens.Jwt;
 using NUnit.Framework;
 using Ticketinho.Repository.Models;
 using Ticketinho.Service.Auth;
@@ -21,15 +19,6 @@ namespace Ticketinho.UnitTests.AuthTests
                 Id = "1",
                 Email = "luke@skywalker.com",
                 Password = "yoda123"
-            };
-
-            var claims = new List<Claim>
-            {
-                new Claim(JwtRegisteredClaimNames.Sub, "TicketinhoToken"),
-                new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture)),
-                new Claim(ClaimTypes.NameIdentifier, user.Id),
-                new Claim(ClaimTypes.Name, user.Email),
-                new Claim(ClaimTypes.Email, user.Email)
             };
 
             // Act
