@@ -23,9 +23,11 @@ namespace Ticketinho.Repository.Repositories
             }.Build();
         }
 
-        public virtual async Task AddAsync(T model)
+        public virtual async Task<string> AddAsync(T model)
         {
-            await Collection.AddAsync(model);
+            var newDocument = await Collection.AddAsync(model);
+
+            return newDocument.Id;
         }
 
         public virtual async Task<T?> GetByIdAsync(string id)

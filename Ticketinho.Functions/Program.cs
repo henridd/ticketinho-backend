@@ -3,6 +3,7 @@ using Microsoft.Extensions.Hosting;
 using Ticketinho.Middlewares;
 using Ticketinho.Repository.Repositories;
 using Ticketinho.Service.Auth;
+using Ticketinho.Service.Tickets;
 
 var host = new HostBuilder()
     .ConfigureFunctionsWorkerDefaults(workerApplication =>
@@ -15,6 +16,7 @@ var host = new HostBuilder()
         services.AddScoped<IUsersRepository, UsersRepository>();
 
         services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ITicketService, TicketService>();
     })
     .Build();
 
