@@ -23,4 +23,8 @@
   <ItemGroup>
     <Folder Include="AuthTests\" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Ticketinho.Common\Ticketinho.Common.csproj" />
+    <ProjectReference Include="..\Ticketinho.Service\Ticketinho.Service.csproj" />
+  </ItemGroup>
 </Project>

@@ -1,7 +1,6 @@
-﻿using System;
-using FluentValidation;
+﻿using FluentValidation;
 
-namespace Ticketinho.DTOs.Validation
+namespace Ticketinho.Common.DTOs.Validation
 {
 	public class CreateUserRequestValidator : AbstractValidator<CreateUserRequestDto>
 	{

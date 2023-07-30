@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
 
-namespace Ticketinho.DTOs.Validation
+namespace Ticketinho.Common.DTOs.Validation
 {
 	public class ValidableRequest<T>
 	{
