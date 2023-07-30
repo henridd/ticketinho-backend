@@ -4,7 +4,7 @@ using Microsoft.Azure.Functions.Worker.Http;
 using Newtonsoft.Json;
 using System.Net;
 using Ticketinho.Common.DTOs.Validation;
-using System.Text.Json;
+using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Ticketinho
 {

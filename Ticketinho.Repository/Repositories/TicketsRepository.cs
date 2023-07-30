@@ -14,5 +14,26 @@ namespace Ticketinho.Repository.Repositories
 
             await document.UpdateAsync("IsActive", true);
         }
+
+        public async Task DeactivateTicketsAsync(DateTime maximumValidDate)
+        {
+            var query = Collection.WhereLessThan("CreatedAt", maximumValidDate);
+
+            var update = new Dictionary<string, object>()
+            {
+                { "IsActive", false }
+            };
+
+            var snapshot = await query.GetSnapshotAsync();
+
+            var batch = Database.StartBatch();
+
+            foreach(var document in snapshot.Documents)
+            {
+                batch.Update(document.Reference, update);
+            }
+
+            await batch.CommitAsync();
+        }
     }
 }

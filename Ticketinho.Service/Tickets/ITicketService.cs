@@ -16,5 +16,7 @@ namespace Ticketinho.Service.Tickets
         Task DeleteAsync(string ticketId);
 
         Task ReactivateTicketAsync(string id);
+
+        Task DeactivateOldTicketsAsync();
     }
 }

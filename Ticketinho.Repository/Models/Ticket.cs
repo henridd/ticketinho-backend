@@ -22,6 +22,9 @@ namespace Ticketinho.Repository.Models
         [FirestoreProperty]
         public bool IsActive { get; set; }
 
+        [FirestoreProperty]
+        public DateTime CreatedAt { get; set; }
+
         public Ticket() { }
 
         public Ticket(string ownerId, TicketZone zone, TicketType type, double price)
@@ -31,6 +34,7 @@ namespace Ticketinho.Repository.Models
             Type = type;
             Price = price;
             IsActive = true;
+            CreatedAt = DateTime.UtcNow;
         }
     }
 }
