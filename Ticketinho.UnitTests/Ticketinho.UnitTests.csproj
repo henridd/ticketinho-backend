@@ -23,7 +23,7 @@
     <None Remove="Services\Auth\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Services\" />
+    <Folder Include="Repository\UnitOfWork\" />
     <Folder Include="Services\Auth\" />
   </ItemGroup>
   <ItemGroup>

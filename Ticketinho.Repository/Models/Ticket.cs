@@ -4,7 +4,6 @@ using Ticketinho.Common.Enums;
 namespace Ticketinho.Repository.Models
 {
     [FirestoreData]
-
     public class Ticket : Model
     {
         [FirestoreProperty]
@@ -25,6 +24,7 @@ namespace Ticketinho.Repository.Models
         [FirestoreProperty]
         public DateTime CreatedAt { get; set; }
 
+        // Used when deserializing from the database
         public Ticket() { }
 
         public Ticket(string ownerId, TicketZone zone, TicketType type, double price)

@@ -7,7 +7,7 @@ using Ticketinho.Validation.Tickets;
 
 namespace Ticketinho.Functions
 {
-    internal class TicketsFunctions
+    public class TicketsFunctions
     {
         private readonly ITicketService _ticketService;
 
@@ -87,11 +87,6 @@ namespace Ticketinho.Functions
         public async Task Run([TimerTrigger("0 0 4 * * *")] TimerInfo timer)
         {
             await _ticketService.DeactivateOldTicketsAsync();
-        }
-
-        public class TimerInfo
-        {
-
         }
     }
 }

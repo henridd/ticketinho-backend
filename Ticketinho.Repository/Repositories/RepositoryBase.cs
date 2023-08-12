@@ -13,14 +13,7 @@ namespace Ticketinho.Repository.Repositories
 
         public RepositoryBase()
         {
-            using StreamReader r = new StreamReader("secrets.json");
-            string json = r.ReadToEnd();
-
-            Database = new FirestoreDbBuilder
-            {
-                ProjectId = "ticketinho",
-                JsonCredentials = json
-            }.Build();
+            Database = DatabaseConnector.ConnectToDatabase();
         }
 
         public virtual async Task<string> AddAsync(T model)
@@ -33,7 +26,7 @@ namespace Ticketinho.Repository.Repositories
         public virtual async Task<T?> GetByIdAsync(string id)
         {
             var document = Collection.Document(id);
-            if(document == null)
+            if (document == null)
             {
                 return null;
             }
@@ -41,6 +34,15 @@ namespace Ticketinho.Repository.Repositories
             var snapshot = await document.GetSnapshotAsync();
 
             return snapshot.ConvertTo<T>();
+        }
+
+        public async Task<IEnumerable<T>> GetByPropertyAsync(string propertyName, string value)
+        {
+            var query = Collection.WhereEqualTo(propertyName, value);
+
+            var snapshot = await query.GetSnapshotAsync();
+
+            return snapshot.Select(x => x.ConvertTo<T>());
         }
 
         public virtual async Task<IEnumerable<T>> GetAllAsync()
@@ -65,6 +67,13 @@ namespace Ticketinho.Repository.Repositories
             }
 
             await document.SetAsync(model);
+        }
+
+        protected virtual async Task UpdateSinglePropertyAsync(string id, string propertyName, object value)
+        {
+            var document = Collection.Document(id);
+
+            await document.UpdateAsync(propertyName, value);
         }
 
         public virtual async Task SaveOrUpdateAsync(T model)

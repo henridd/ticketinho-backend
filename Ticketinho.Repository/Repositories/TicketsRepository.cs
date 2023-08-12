@@ -6,14 +6,10 @@ namespace Ticketinho.Repository.Repositories
 
     public class TicketsRepository : RepositoryBase<Ticket>, ITicketsRepository
     {
-        protected override string CollectionName => "tickets";
+        protected override string CollectionName => RepositoryNames.Tickets;
 
-        public async Task ReactivateAsync(Ticket ticket)
-        {
-            var document = Collection.Document(ticket.Id);
-
-            await document.UpdateAsync("IsActive", true);
-        }
+        public async Task ReactivateAsync(Ticket ticket) 
+            => await UpdateSinglePropertyAsync(ticket.Id, nameof(ticket.IsActive), true);
 
         public async Task DeactivateTicketsAsync(DateTime maximumValidDate)
         {
