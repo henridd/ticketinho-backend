@@ -9,9 +9,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ticketinho.Repository", "Ti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ticketinho.Service", "Ticketinho.Service\Ticketinho.Service.csproj", "{53305497-2DFE-4E20-9520-64385B13B5BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketinho.UnitTests", "Ticketinho.UnitTests\Ticketinho.UnitTests.csproj", "{04CB2837-2735-4F09-A0F9-F736BA6BFD16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ticketinho.UnitTests", "Ticketinho.UnitTests\Ticketinho.UnitTests.csproj", "{04CB2837-2735-4F09-A0F9-F736BA6BFD16}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketinho.Common", "Ticketinho.Common\Ticketinho.Common.csproj", "{D535A57F-0FEB-4824-BD82-E51CE27D2DB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Ticketinho.Common", "Ticketinho.Common\Ticketinho.Common.csproj", "{D535A57F-0FEB-4824-BD82-E51CE27D2DB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketinho.Bootstrap", "Ticketinho.Bootstrap\Ticketinho.Bootstrap.csproj", "{0A153E3C-A001-45D0-9C04-C97B03D998F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{D535A57F-0FEB-4824-BD82-E51CE27D2DB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D535A57F-0FEB-4824-BD82-E51CE27D2DB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D535A57F-0FEB-4824-BD82-E51CE27D2DB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A153E3C-A001-45D0-9C04-C97B03D998F7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A153E3C-A001-45D0-9C04-C97B03D998F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A153E3C-A001-45D0-9C04-C97B03D998F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A153E3C-A001-45D0-9C04-C97B03D998F7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
