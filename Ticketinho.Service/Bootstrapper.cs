@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Ticketinho.Service.Auth;
+using Ticketinho.Service.Demands;
 using Ticketinho.Service.Negotiations;
 using Ticketinho.Service.Tickets;
 
@@ -20,6 +21,7 @@ namespace Ticketinho.Service
             services.AddScoped<ICryptoService, CryptoService>();
             services.AddScoped<ITicketService, TicketService>();
             services.AddScoped<INegotiationService, NegotiationService>();
+            services.AddScoped<IDemandService, DemandService>();
         }
     }
 }
