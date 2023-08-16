@@ -18,6 +18,7 @@ namespace Ticketinho.Repository
             services.AddScoped<ITicketsRepository, TicketsRepository>();
             services.AddScoped<IUsersRepository, UsersRepository>();
             services.AddScoped<INegotiationsRepository, NegotiationRepository>();
+            services.AddScoped<IDemandsRepository, DemandsRepository>();
         }
     }
 }
