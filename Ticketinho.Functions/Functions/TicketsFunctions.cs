@@ -66,6 +66,10 @@ namespace Ticketinho.Functions
         public async Task<HttpResponseData> Update([HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "tickets/{id}")] HttpRequestData req, string id)
         {
             var updateRequest = await req.GetJsonBody<UpdateTicketRequestDto, UpdateTicketRequestValidator>();
+            if (!updateRequest.IsValid)
+            {
+                return await updateRequest.ToBadRequest(req);
+            }
 
             await _ticketService.UpdateAsync(id,
                                              updateRequest.Value.Zone,
