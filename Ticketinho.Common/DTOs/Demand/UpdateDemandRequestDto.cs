@@ -5,10 +5,13 @@ namespace Ticketinho.Common.DTOs.Demand
 {
     public class UpdateDemandRequestDto
     {
+        [JsonPropertyName("zone")]
         public TicketZone Zone { get; set; }
 
+        [JsonPropertyName("type")]
         public TicketType Type { get; set; }
 
+        [JsonPropertyName("price")]
         public double Price { get; set; }
     }
 }
