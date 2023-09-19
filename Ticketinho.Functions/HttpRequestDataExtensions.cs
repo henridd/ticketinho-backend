@@ -11,7 +11,7 @@ namespace Ticketinho
         public static async Task<HttpResponseData> CreateResponseWithContentAsync<T>(this HttpRequestData req, T content, HttpStatusCode statusCode = HttpStatusCode.OK)
         {
             var response = req.CreateResponse(statusCode);
-            var jsonContent = JsonSerializer.Serialize(content);
+            var jsonContent = JsonSerializer.Serialize(content, options: new JsonSerializerOptions(JsonSerializerDefaults.Web));
             response.Body = await new StringContent(jsonContent).ReadAsStreamAsync();
             return response;
         }
